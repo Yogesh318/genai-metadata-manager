@@ -18,18 +18,40 @@ business-friendly documentation in seconds using GenAI.
 - Ships with a realistic healthcare RCM demo database
 
 ## 🏗️ Architecture
-```
-DB Schema Introspection (SQLAlchemy)
-        ↓
-Rich Context Builder (column types, nullability, sample rows)
-        ↓
-AI Prompt Engineering (Claude or Gemini)
-        ↓
-Structured JSON Response (table desc, column defs, glossary)
-        ↓
-Human Review & Approval (Streamlit UI)
-        ↓
-Metadata Store (JSON → exportable to Unity Catalog / OpenMetadata)
+```mermaid
+flowchart LR
+    subgraph DB["🗄️ Data Source"]
+        A1[SQLite / PostgreSQL\nMySQL / Any SQL DB]
+    end
+
+    subgraph INSPECT["🔍 Schema Introspection"]
+        B1[SQLAlchemy Inspector]
+        B2[Context Builder\ncolumns · types · samples]
+        B1 --> B2
+    end
+
+    subgraph AI["🤖 AI Generation"]
+        C1[Prompt Engineering]
+        C2[Claude Sonnet\nAnthropic]
+        C3[Gemini Flash\nGoogle]
+        C1 --> C2
+        C1 --> C3
+    end
+
+    subgraph UI["🎯 Streamlit App"]
+        D1[Table Browser]
+        D2[Human Review & Edit]
+        D3[Approve & Save]
+        D1 --> D2 --> D3
+    end
+
+    subgraph OUT["📤 Output"]
+        E1[JSON Metadata Store]
+        E2[Markdown Export]
+        E3[JSON Export]
+    end
+
+    DB --> INSPECT --> AI --> UI --> OUT
 ```
 
 ## 🚀 Quick Start
