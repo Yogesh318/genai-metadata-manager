@@ -1,0 +1,16 @@
+# In your project folder
+pip freeze > requirements.txt
+git add requirements.txt
+git commit -m "fix: update requirements.txt with all dependencies"
+git push
+```
+
+Your `requirements.txt` must include these exact packages:
+```
+streamlit
+anthropic
+google-generativeai
+sqlalchemy
+pandas
+python-dotenv
+tabulate

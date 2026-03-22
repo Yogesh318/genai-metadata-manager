@@ -1,5 +1,10 @@
 import streamlit as st, json, os
-from dotenv import load_dotenv
+# Replace the top of app.py:
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # On Streamlit Cloud, secrets are injected automatically
 from db_inspector import DBInspector
 from ai_generator import generate_with_claude, generate_with_gemini
 from metadata_store import save_doc, get_doc, get_all_docs, export_markdown
